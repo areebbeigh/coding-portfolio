@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}About Me{% endblock %}
+{% block content %}
+    <h2>About this website</h2>
+    <hr/>
+    <p>{{about|safe|linebreaksbr}}</p>
+{% endblock %}

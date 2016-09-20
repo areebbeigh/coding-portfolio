@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block extend %}<!-- Extra meta data or head content here -->{% endblock %}
+{% block title %}Home {% endblock %}
+{% block content %}
+    <h1>It works! Coding Portfolio is up and running!</h1>
+    <hr/>
+    <h4>Next steps - customize the layout.html and index.html and add the other information stuff in your Django admin panel.</h4>
+    <p>For help: <a href="https://github.com/areebbeigh/coding-portfolio">Coding Portfolio</a></p>
+    <hr/>
+    <h3>Recent Posts</h3>
+    <br/>
+    {% include "project_list.html" %}
+{% endblock %}

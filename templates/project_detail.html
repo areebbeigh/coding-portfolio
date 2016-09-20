@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Viewing {{project.name}}{% endblock %}
+{% block content %}
+<h2><a href="{% url 'project_detail' project.id %}">{{project.name}}</a></h2>
+<hr/>
+<div class="row text-muted">
+    <div class="col-md-10">
+        <p class="">
+            {% if project.description.0 != '<' %}
+            <span style="font-size:350%;color:black;">
+                {{project.description.0|capfirst}}
+            </span>
+            {{project.description|slice:"1:"|safe|linebreaksbr}}
+            {% else %}
+            {{project.description|safe|linebreaksbr}}
+            {% endif %}
+        </p>
+    </div>
+</div>
+<p>
+Language{{project.languages.all.count|pluralize}}:
+    {% for language in project.languages.all %}
+    <span class="label label-info">{{language.name}}</span>
+    {% endfor %}
+</p>
+{% endblock %}
