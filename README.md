@@ -1,5 +1,5 @@
 # Coding Portfolio
-A Django webapp for those programmers who are lazy to do too much to setup a website for their projects.
+A <a href="https://www.djangoproject.com/">Django</a> webapp for those programmers who are lazy to do too much to setup a website for their projects.
 
 ## What does this app do?
 Coding Portfolio is a simple webapp for the Django framework that provides you a ready-made website where you can post your 
@@ -22,7 +22,7 @@ a good webhost or a VPS so I went for free webhosts. I setup a WordPress blog ra
 website would go down frequently, slow loading etc. So finally I decided to make a web app of my own for this purpose. The idea
 was to make something <b>simple</b> (I am a lazy person) good enough to use and Coding Portfolio was born.
 
-My website: http://www.areebbeigh.tk
+My website: areeb12.pythonanywhere.com
 
 ## Working
 The working is straight forward, each project has a non-nullable title, description and language field and an option thumbnail
