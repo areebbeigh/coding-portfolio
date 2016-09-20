@@ -32,7 +32,7 @@ automatically and your projects are categorized based on the project's language 
 Like I said, Coding Portfolio is a simple web app for lazy programmers like me.
 
 ## Setup
-Setting up coding portfolio is easy, just download it, put it in your Django website folder (with the name `coding_portfolio`)
+Setting up coding portfolio is easy, just download it, put it's contents in your Django website folder (in a folder named `coding_portfolio`)
 and add it on `INSTALLED_APP` in your website's settings file just like you add any other web app to your website.
 
 Add a url to the `urlpatterns` of your Django website and include the `coding_portfolio.urls` file.
