@@ -16,7 +16,7 @@ projects right from the default Django administration interface.
 </ul>
 and more..
 
-## Why did you make app?
+## Why did you make this app?
 Well to put it short - I needed to host a website where I could display my programming projects but I was too broke to afford
 a good webhost or a VPS so I went for free webhosts. I setup a WordPress blog ran it for a month but it was not good enough, the
 website would go down frequently, slow loading etc. So finally I decided to make a web app of my own for this purpose. The idea
@@ -53,6 +53,6 @@ still under development feel free to contribute to the project!
 
 <hr>
 
-Developer: Areeb Beigh <areebbeigh@gmail.com>
-Version: 1.0
-GitHub Repo: https://github.com/areebbeigh/coding-portfolio
+Developer: Areeb Beigh <areebbeigh@gmail.com> <br>
+Version: 1.0 <br>
+GitHub Repo: https://github.com/areebbeigh/coding-portfolio <br>
