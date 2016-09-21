@@ -20,7 +20,7 @@ and more..
 Well to put it short - I needed to host a website where I could display my programming projects but I was too broke to afford
 a good webhost or a VPS so I went for free webhosts. I setup a WordPress blog ran it for a month but it was not good enough, the
 website would go down frequently, slow loading etc. (after all it was a free webhost) So finally I decided to make a web app of my own for this purpose. The idea
-was to make something <b>simple</b> and <b>light</lb> (I am a lazy person) good enough to use and Coding Portfolio was born.
+was to make something <b>simple</b> and <b>light</b> (I am a lazy person) good enough to use and Coding Portfolio was born.
 
 My website: areeb12.pythonanywhere.com
 
