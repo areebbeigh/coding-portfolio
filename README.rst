@@ -3,6 +3,8 @@ Coding Portfolio
 ================
 A Django webapp for settings up your coding portoflio.
 
+.. image:: preview.png
+
 What's new?
 -----------
 
