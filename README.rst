@@ -52,6 +52,7 @@ You will also need to copy the contents of the ``media`` folder to your website'
 
 Edit the templates ``layout.html`` and ``index.html`` to change the default text.
 
+Next add some objects to the ``Contacts`` model, you'll see the About dropdown gets populated automatically.
 Finally in the Django administration interface add some content in the ``Abouts`` model.
 
 You're done!
