@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block title %}Viewing {{language}} projects{% endblock %}
 {% block content %}
-    <h1>Viewing {{language}} projects</h1>
+    <img class="project_list_lang_thumbnail" src="{{language.get_thumbnail}}" alt="Thumbnail">
+    <h1 class="project_list_title">Viewing {{language.name}} projects</h1>
     <hr/>
     {% include "project_list.html" %}
 {% endblock %}

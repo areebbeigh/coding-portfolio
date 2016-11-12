@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initialscale=1.0">
     {% block extend %}{% endblock %}
     <!-- Static files mainly for development -->
-	<!--<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">-->
-    <!--<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">-->
-    <!--<script src="{% static 'js/jquery.js' %}"></script>-->
-    <!--<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>-->
+    <!-- <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <!-- CDN STARTS HERE -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -18,67 +18,86 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<script>$(function () { $("[data-toggle='popover']").popover(); });</script>  <!-- Popover script -->
+    <script>$(function () {
+        $("[data-toggle='popover']").popover();
+    });</script>  <!-- Popover script -->
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
     <title>Coding Portfolio | {% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Coding Portfolio</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{% url 'index' %}"><span class="fa fa-home"></span> Home</a></li>
-                    <li>
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-star"></span> Projects <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                {% with languages=""|getlanguages %}
-                                {% for lang in languages %}
-                                <li class="presentation"><a href="{% url 'projects_page' lang %}"><span class="fa fa-angle-right"></span> {{lang}}</a></li>
-                                {% endfor %}
-                                {% endwith %}
-                            </ul>
-                    </li>
-                    <li><a href="{% url 'project_feed' %}" target="_blank"><span class="fa fa-rss"></span> RSS</a></li>
-                </ul>
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Coding Portfolio</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'index' %}"><span class="fa fa-home"></span> Home</a></li>
+                <li>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-star"></span> Projects
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        {% with languages=""|getlanguages %}
+                        {% for lang in languages %}
+                        <li class="presentation"><a href="{% url 'projects_page' lang %}"><span
+                                class="fa fa-angle-right"></span> {{lang}}</a></li>
+                        {% endfor %}
+                        {% endwith %}
+                    </ul>
+                </li>
+                <li><a href="{% url 'project_feed' %}" target="_blank"><span class="fa fa-rss"></span> RSS</a></li>
+            </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="dropdown-toggle" href="" data-toggle="dropdown">About <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="dropdown-header">About</li>
-                            <li class="presentation"><a href="{% url 'about_page' %}"><span class="fa fa-fw fa-info"></span> What is this?</a></li>
-                            <li class="dropdown-header">Contact</li>
-                            <li class="presentation"><a href="">Edit me in layout.html</a></li>
-                        </ul>
-                    </li>
-                    <li>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="dropdown-toggle" href="" data-toggle="dropdown">About <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">About</li>
+                        <li class="presentation"><a href="{% url 'about_page' %}"><span class="fa fa-fw fa-info"></span>
+                            What is this?</a></li>
+                        <li class="dropdown-header">Contact</li>
+                        {% with contacts=""|getcontacts %}
+                        {% for contact in contacts %}
+                        <li class="presentation"><a href="{{contact.url}}" target="_blank">
+                            <span class="fa {{contact.font_awesome_class}}"></span> {{contact.name}}</a>
+                        </li>
+                        {% endfor %}
+                        {% endwith %}
+                    </ul>
+                </li>
+                <li>
                     <form class="navbar-form" method="get" action="{% url 'search_page' %}">
                         <div class="input-group">
                             <input type="text" name="q" class="form-control" placeholder="Search">
-                            <span class="input-group-btn"><button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button></span>
+                            <span class="input-group-btn"><button type="submit" class="btn btn-default"><span
+                                    class="fa fa-search"></span></button></span>
                         </div>
                     </form>
-                    </li>
-                </ul>
-            </div>
+                </li>
+            </ul>
         </div>
     </div>
-    <br/><br/><br/>
-    <div class="container body-content">
-        {% block content %} {% endblock %}
-        <hr />
-        <footer>
-            <p class="pull-left">{% now "Y" as current_yr %}&copy; {{current_yr}} Areeb Beigh (edit me in layout.html)</p>
-            {# DO NOT REMOVE #}
-            <p class="pull-right">Powered by <a href="https://www.djangoproject.com" target="_blank">Django</a> and <a href="https://github.com/areebbeigh/coding-portfolio" target="_blank">Coding Portfolio</a></p>
-        </footer>
-    </div>
+</div>
+<br/><br/><br/>
+<div class="container body-content">
+    {% block content %} {% endblock %}
+    <hr/>
+    <footer>
+        <p class="pull-left">{% now "Y" as current_yr %}&copy; {{current_yr}} Areeb Beigh (edit me in layout.html)</p>
+        {# DO NOT REMOVE #}
+        <p class="pull-right">Powered by <a href="https://www.djangoproject.com" target="_blank">Django</a> and <a
+                href="https://github.com/areebbeigh/coding-portfolio" target="_blank">Coding Portfolio</a></p>
+    </footer>
+</div>
 </body>
 </html>

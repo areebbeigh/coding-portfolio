@@ -1,6 +1,25 @@
+"""
+   Copyright 2016 Areeb Beigh
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+"""
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.conf import settings
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
-from coding_portfolio.models import Project, Language, About
+from .models import Project, Language, About, Platform
+
 
 # TODO: Be able to show <code> or <pre> blocks as code in posts. - Need help with this!
 
@@ -18,30 +37,11 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-################################################################################
-#                                                                              #
-#    Copyright (C) 2016  Areeb Beigh <areebbeigh@gmail.com>                    #
-#                                                                              #
-#    This program is free software: you can redistribute it and/or modify      #
-#    it under the terms of the GNU General Public License as published by      #
-#    the Free Software Foundation, either version 3 of the License, or         #
-#    (at your option) any later version.                                       #
-#                                                                              #
-#    This program is distributed in the hope that it will be useful,           #
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of            #
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
-#    GNU General Public License for more details.                              #
-#                                                                              #
-#    You should have received a copy of the GNU General Public License         #
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     #
-#                                                                              #
-################################################################################
-
 
 def project_list(request, language):
     """ Returns the projects list for a given language """
-    language_object = get_object_or_404(Language, name=language)
-    paginator = Paginator(language_object.project_set.order_by('-publish_date'), 6)
+    language = get_object_or_404(Language, name=language)
+    paginator = Paginator(language.project_set.order_by('-publish_date'), 6)
 
     if 'page' not in request.GET:
         page = 1
@@ -53,6 +53,7 @@ def project_list(request, language):
         projects = paginator.page(1)
     except EmptyPage:
         projects = paginator.page(paginator.num_pages)
+
     context = {
         'projects': projects,
         'language': language,
@@ -63,8 +64,11 @@ def project_list(request, language):
 def project_detail(request, project_id):
     """ Returns view for individual project pages """
     project_object = get_object_or_404(Project, id=project_id)
+    # Temporary, till custom website icons are supported
+    website_thumbnail = settings.MEDIA_URL + "default_website_thumbnail.svg"
     context = {
         'project': project_object,
+        'website_thumbnail': website_thumbnail,
     }
     return render(request, 'project_detail.html', context)
 
@@ -75,16 +79,30 @@ def search(request):
         queries = request.GET['q'].split()
         projects = []
         for q in queries:
-            projects.extend(list(Project.objects.filter(name__icontains=q)))
+            projects.extend(list(Project.objects.filter(
+                Q(name__icontains=q) |
+                Q(description__icontains=q) |
+                Q(short_description__icontains=q))))
+
+            for lang in Language.objects.filter(name__icontains=q):
+                for project in lang.project_set.all():
+                    projects.append(project)
+
+            for platform in Platform.objects.filter(name__icontains=q):
+                for project in platform.project_set.all():
+                    projects.append(project)
+
             try:
                 # If a number is given, include the project with that ID if any
                 q = int(q)
-                projects.extend(Project.objects.get(id=q))
-            except ValueError:
+                projects.append(Project.objects.get(id=q))
+            except:
                 pass
 
+        projects = set(projects)
+
         context = {
-            'projects': projects,
+            'projects': list(projects),
         }
         return render(request, 'search_page.html', context)
     else:

@@ -1,3 +1,19 @@
+"""
+   Copyright 2016 Areeb Beigh
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+"""
+
 # Python imports
 import collections
 from html.parser import HTMLParser
@@ -6,26 +22,7 @@ from html.parser import HTMLParser
 from django import template
 
 # Local imports
-from coding_portfolio.models import Language
-
-################################################################################
-#                                                                              #
-#    Copyright (C) 2016  Areeb Beigh <areebbeigh@gmail.com>                    #
-#                                                                              #
-#    This program is free software: you can redistribute it and/or modify      #
-#    it under the terms of the GNU General Public License as published by      #
-#    the Free Software Foundation, either version 3 of the License, or         #
-#    (at your option) any later version.                                       #
-#                                                                              #
-#    This program is distributed in the hope that it will be useful,           #
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of            #
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
-#    GNU General Public License for more details.                              #
-#                                                                              #
-#    You should have received a copy of the GNU General Public License         #
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     #
-#                                                                              #
-################################################################################
+from ..models import Language, Contact
 
 
 # http://stackoverflow.com/questions/753052/strip-html-from-strings-in-python
@@ -47,6 +44,7 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
 
 register = template.Library()
 
@@ -113,6 +111,28 @@ def getlanguages(value):
     menu items.
     """
     return [lang.name for lang in Language.objects.all() if lang.project_set.all()]
+
+
+@register.filter
+def getcontacts(value):
+    """
+    Returns a list of dictionary of the type:
+        {
+            'name': '<contact_name>',
+            'font_awesome_class': '<font_awesome_class>',
+            'url': '<contact url>'
+        }
+    """
+    result = []
+    for contact in Contact.objects.all():
+        dictionary = {}
+        dictionary["name"] = contact.name
+        dictionary["font_awesome_class"] = contact.font_awesome_class
+        dictionary["url"] = contact.url
+        result.append(dictionary)
+
+    return result
+
 
 """
 -> A close yet fucked up attempt at displaying <code></code> blocks as-is in posts.

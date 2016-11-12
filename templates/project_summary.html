@@ -1,0 +1,42 @@
+{% load custom_filters %}
+<p class="text-center text-muted"><i>{{project.short_description}}</i></p>
+<div class="row">
+    <div class="col-md-4 border-right">
+        <h2 align="center">Platform{{project.platform.all.count|pluralize}}</h2>
+        <div style="text-align: center">
+            {% for platform_triplet in project.platform.all|getsubdivisions:"3" %}
+            {% for platform in platform_triplet %}
+            <img data-toggle="tooltip" data-placement="bottom" title="{{platform.name}}"
+                 class="project_summary_thumbnail" src="{{platform.get_thumbnail}}"
+                 alt="{{platform.name}}">
+            {% endfor %}<br>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4 border-right">
+        <h2 align="center">Language{{project.languages.all.count|pluralize}}</h2>
+        <div style="text-align: center">
+            {% for lang_triplet in project.languages.all|getsubdivisions:"3" %}
+            {% for lang in lang_triplet %}
+            <img data-toggle="tooltip" data-placement="bottom" title="{{lang.name}}"
+                 class="project_summary_thumbnail" src="{{lang.get_thumbnail}}"
+                 alt="{{lang.name}}">
+            {% endfor %}<br>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h2 align="center">Website{{project.website.all.count|pluralize}}</h2>
+        <div style="text-align: center">
+            {% for website_triplet in project.website.all|getsubdivisions:"3" %}
+            {% for website in website_triplet %}
+            <a href="{{website.url}}" target="_blank" style="text-decoration: none">
+                <img class="project_summary_thumbnail" src="{{website.get_thumbnail}}" data-toggle="tooltip"
+                     data-placement="bottom" title="{{website.name}}"
+                     alt="{{website.name}}">
+            </a>
+            {% endfor %}<br>
+            {% endfor %}
+        </div>
+    </div>
+</div>

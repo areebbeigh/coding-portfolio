@@ -1,8 +1,33 @@
+.border-right {
+  border-right: 1px solid #eee;
+}
+
+.project_list_lang_thumbnail {
+    display: inline;
+    width: 70px;
+    height: 70px;
+    margin-right: 5px;
+}
+
+.project_list_title {
+    display: inline;
+    position: relative;
+    top: 20px;
+}
+
+.project_description {
+    font-size: 17px;
+}
+
 .project_thumbnail {
-    max-height: 193px;
-    max-width: 357px;
-    min-height: 193px;
-    min-width: 357px;
+    width: 357px;
+    height: 193px;
+}
+
+.project_summary_thumbnail {
+    width: 95px;
+    height: 95px;
+    padding: 10px;
 }
 
 
