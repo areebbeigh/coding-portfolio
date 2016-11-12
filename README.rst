@@ -1,7 +1,7 @@
 ================
 Coding Portfolio
 ================
-A Django webapp for settings up your coding portoflio.
+A Django webapp for setting up your programming portoflio.
 
 .. image:: preview.png
 
