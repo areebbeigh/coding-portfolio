@@ -62,6 +62,6 @@ Found a bug? typo? error? or do you have a feature that you can implement? Codin
 
 <hr>
 
-Developer: Areeb Beigh <areebbeigh@gmail.com> <br>
-Version: 1.0 <br>
-GitHub Repo: https://github.com/areebbeigh/coding-portfolio <br>
+| Developer: Areeb Beigh <areebbeigh@gmail.com>
+| Version: 1.0
+| GitHub Repo: https://github.com/areebbeigh/coding-portfolio
