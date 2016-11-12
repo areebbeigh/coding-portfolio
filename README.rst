@@ -60,8 +60,6 @@ Contributing
 ------------
 Found a bug? typo? error? or do you have a feature that you can implement? Coding Portfolio is my first Django project feel free to use or expand the project! I'll be waiting for your pull requests!
 
-<hr>
-
 | Developer: Areeb Beigh <areebbeigh@gmail.com>
-| Version: 1.0
+| Version: 1.0.1
 | GitHub Repo: https://github.com/areebbeigh/coding-portfolio
