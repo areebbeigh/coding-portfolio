@@ -38,16 +38,16 @@ class BaseModel:
         Returns the URL to the thumbnail associated with this object.
         """
         if is_project:
-            DEFAULT_THUMBNAIL = "/default_project_thumbnail.png"
+            DEFAULT_THUMBNAIL = "default_project_thumbnail.png"
         elif is_website:
-            DEFAULT_THUMBNAIL = "/default_website_thumbnail.svg"
+            DEFAULT_THUMBNAIL = "default_website_thumbnail.svg"
         else:
-            DEFAULT_THUMBNAIL = "/default_thumbnail.png"
+            DEFAULT_THUMBNAIL = "default_thumbnail.png"
 
         if self.thumbnail:
             return self.thumbnail.get_thumbnail()
         else:
-            return settings.MEDIA_URL + DEFAULT_THUMBNAIL  # Default thumbnail
+            return settings.STATIC_URL + "thumbnails/" + DEFAULT_THUMBNAIL  # Default thumbnail
 
 
 class Image(models.Model):

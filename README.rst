@@ -48,8 +48,6 @@ and add it to the ``INSTALLED_APPS`` in your website's settings file just like y
 
 Add a url to the ``urlpatterns`` of your Django website and include the ``coding_portfolio.urls`` file.
 
-You will also need to copy the contents of the ``media`` folder to your website's ``MEDIA_ROOT``.
-
 Edit the templates ``layout.html`` and ``index.html`` to change the default text.
 
 Next add some objects to the ``Contacts`` model, you'll see the About dropdown gets populated automatically.
